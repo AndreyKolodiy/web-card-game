@@ -10,19 +10,43 @@ public class MessageEntity {
     private Date time;
 
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Integer getFromAccountId() {
+        return fromAccountId;
+    }
+
     public void setFromAccountId(Integer fromAccountId) {
         this.fromAccountId = fromAccountId;
     }
+
+    public Integer getToAccountId() {
+        return toAccountId;
+    }
+
     public void setToAccountId(Integer toAccountId) {
         this.toAccountId = toAccountId;
     }
-    public void setTime (Date time){
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
         this.time = time;
-    }
-    public void setText (String text){
-        this.text = text;
-    }
-    public void setId (Integer id){
-        this.id = id;
     }
 }
