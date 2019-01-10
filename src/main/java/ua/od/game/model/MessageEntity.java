@@ -9,7 +9,10 @@ public class MessageEntity {
     private Integer toAccountId;
     private Date time;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec350be74a77872a13d9b2aaedea7c845166f66b
     public Integer getId() {
         return id;
     }
@@ -34,6 +37,7 @@ public class MessageEntity {
         this.fromAccountId = fromAccountId;
     }
 
+<<<<<<< HEAD
     public Integer getToAccountId() {
         return toAccountId;
     }
@@ -41,6 +45,15 @@ public class MessageEntity {
     public void setToAccountId(Integer toAccountId) {
         this.toAccountId = toAccountId;
     }
+=======
+    public void setToAccountId(Integer toAccountId) {
+        this.toAccountId = toAccountId;
+    }
+  
+    public Integer getToAccountId() {
+        return toAccountId;
+    }
+>>>>>>> ec350be74a77872a13d9b2aaedea7c845166f66b
 
     public Date getTime() {
         return time;
@@ -50,3 +63,6 @@ public class MessageEntity {
         this.time = time;
     }
 }
+
+
+

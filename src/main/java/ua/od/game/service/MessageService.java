@@ -6,6 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface MessageService {
-    List<MessageDto> getMessageList(Integer fromAccountId, Integer toAccountId, Date fromTime);
+    List<MessageDto> getMessageList();
     Boolean sendMessage(MessageDto message);
 }
