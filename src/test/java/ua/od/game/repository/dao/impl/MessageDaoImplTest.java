@@ -1,5 +1,6 @@
 package ua.od.game.repository.dao.impl;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import ua.od.game.model.MessageEntity;
@@ -8,6 +9,8 @@ import ua.od.game.repository.dao.DbTest;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * @author Andrey Kolodiy
@@ -25,20 +28,21 @@ public class MessageDaoImplTest extends DbTest {
     public void getMessageListTest() {
         String dateText = "2019-01-15 10:45:00";
         Date dateTime = Timestamp.valueOf(dateText);
-        Date CounterDateTame = null;
+        Date counterDateTame = null;
         List<MessageEntity> message = messageDao.getMessageList(222, 111, dateTime);
         for (int i = 0; i < message.size(); i++) {
-            System.out.print("Fron account: " + message.get(i).getFromAccountId() + " ");
+            System.out.print("From account: " + message.get(i).getFromAccountId() + " ");
             System.out.println("To account: " + message.get(i).getToAccountId() + " ");
             System.out.println("Text  Message: " + message.get(i).getText() + " ");
             System.out.println("Date and time: " + message.get(i).getTime() + " ");
             System.out.println(" ");
-            CounterDateTame = message.get(i).getTime();
+            counterDateTame = message.get(i).getTime();
         }
-        assert CounterDateTame.after(dateTime);
+
+        assertNotEquals(counterDateTame, dateTime);
     }
 
     @Test
-    public void sendMessage() {
+    public void sendMessageTest() {
     }
 }
