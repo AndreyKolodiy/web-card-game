@@ -10,8 +10,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Andrey Kolodiy
@@ -20,6 +19,11 @@ import static org.junit.Assert.assertNotEquals;
 public class MessageDaoImplTest extends DbTest {
     MessageDaoImpl messageDao;
 
+    private static final int fromAccountId = 222;
+    private static final int toAccountId = 111;
+    private final String dateText = "2019-01-15 10:45:00";
+    private final Date dateTime = Timestamp.valueOf(dateText);
+
     @Before
     public void init() {
         messageDao = new MessageDaoImpl();
@@ -27,24 +31,14 @@ public class MessageDaoImplTest extends DbTest {
 
     @Test
     public void getMessageListTest() {
-        String dateText = "2019-01-15 10:45:00";
-        Date dateTime = Timestamp.valueOf(dateText);
-        Date counterDateTame = null;
-        int counterMessage = 0;
-        List<MessageEntity> message = messageDao.getMessageList(222, 111, dateTime);
-        for (int i = 0; i < message.size(); i++) {
-            System.out.print("From account: " + message.get(i).getFromAccountId() + " ");
-            System.out.println("To account: " + message.get(i).getToAccountId() + " ");
-            System.out.println("Text  Message: " + message.get(i).getText() + " ");
-            System.out.println("Date and time: " + message.get(i).getTime() + " ");
-            System.out.println(" ");
-            counterDateTame = message.get(i).getTime();
-            ++counterMessage;
+        boolean result = Boolean.parseBoolean(null);
+        List<MessageEntity> messages = messageDao.getMessageList(fromAccountId, toAccountId, dateTime);
+        for (MessageEntity massages : messages) {
+            if (massages.getFromAccountId() == fromAccountId && massages.getToAccountId() == toAccountId && massages.getTime().after(dateTime))
+                result = true;
         }
-        assertNotEquals(counterDateTame, dateTime);
-        assertEquals(2, counterMessage);
+        assertTrue(result);
     }
-
 
     @Test
     public void sendMessageTest() {
