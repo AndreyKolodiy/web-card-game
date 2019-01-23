@@ -3,14 +3,13 @@ package ua.od.game.repository.dao.impl;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.od.game.model.MessageEntity;
 import ua.od.game.repository.dao.DbTest;
 
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 /**
  * @author Andrey Kolodiy
@@ -19,10 +18,10 @@ import static org.junit.Assert.assertTrue;
 public class MessageDaoImplTest extends DbTest {
     MessageDaoImpl messageDao;
 
-    private static final int fromAccountId = 222;
-    private static final int toAccountId = 111;
+    private static final Integer FROM_ACCOUNT_ID = 222;
+    private static final Integer TO_ACCOUNT_ID = 111;
     private final String dateText = "2019-01-15 10:45:00";
-    private final Date dateTime = Timestamp.valueOf(dateText);
+    private final Date DATETIME = Timestamp.valueOf(dateText);
 
     @Before
     public void init() {
@@ -31,13 +30,11 @@ public class MessageDaoImplTest extends DbTest {
 
     @Test
     public void getMessageListTest() {
-        boolean result = Boolean.parseBoolean(null);
-        List<MessageEntity> messages = messageDao.getMessageList(fromAccountId, toAccountId, dateTime);
-        for (MessageEntity massages : messages) {
-            if (massages.getFromAccountId() == fromAccountId && massages.getToAccountId() == toAccountId && massages.getTime().after(dateTime))
-                result = true;
-        }
-        assertTrue(result);
+        messageDao.getMessageList(FROM_ACCOUNT_ID, TO_ACCOUNT_ID, DATETIME).forEach(message -> {
+            assertEquals(FROM_ACCOUNT_ID, message.getFromAccountId());
+            assertEquals(TO_ACCOUNT_ID, message.getToAccountId());
+            assertTrue(message.getTime().after(DATETIME));
+        });
     }
 
     @Test
